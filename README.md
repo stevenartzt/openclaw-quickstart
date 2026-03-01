@@ -2,6 +2,8 @@
 
 One-command setup for OpenClaw on **WSL**, **Linux**, or **VPS**.
 
+> ℹ️ **What's included:** This installer sets up OpenClaw and optionally includes the [Public.com trading skill](https://github.com/publicdotcom/claw-skill-public-dot-com) for stock/options trading via the Public.com API. You'll be asked during setup if you want to install it — it's completely optional.
+
 ---
 
 ## 📋 Before You Start
@@ -104,7 +106,9 @@ The script will:
 1. ✅ Install Node.js 22 (takes ~1 min)
 2. ✅ Install OpenClaw (takes ~30 sec)
 3. ✅ Create your workspace
-4. ❓ Ask: "Install Public.com trading skill?" → Type `y` or `n`
+4. ❓ Ask: **"Install Public.com trading skill?"** → Type `y` or `n`
+   - This is optional — adds stock/options trading via [Public.com](https://public.com)
+   - If you don't trade, just type `n`
 5. ❓ Ask: "Enter your API key" → Paste your Anthropic/OpenAI key
 6. ❓ Ask: "Set up as background service?" → Type `y` for always-on
 
