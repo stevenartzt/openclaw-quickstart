@@ -2,6 +2,32 @@
 
 One-command setup for OpenClaw on **WSL**, **Linux**, or **VPS**.
 
+## Prerequisites
+
+Before running the script, make sure you have:
+
+| Requirement | Details |
+|-------------|---------|
+| **OS** | WSL (Windows 10/11), Ubuntu, Debian, RHEL/CentOS, or macOS |
+| **RAM** | 4GB minimum, 8GB+ recommended |
+| **Storage** | 2GB free space |
+| **Internet** | Stable connection for downloads |
+| **API Key** | From one of: [Anthropic](https://console.anthropic.com/), [OpenAI](https://platform.openai.com/), or [OpenRouter](https://openrouter.ai/) |
+
+### For WSL Users (Windows)
+
+1. Open **PowerShell as Administrator**
+2. Run: `wsl --install`
+3. Restart your computer
+4. Open Ubuntu from Start menu and create your Linux username/password
+
+### For VPS Users
+
+- SSH access to your server
+- `sudo` privileges (or root access)
+
+---
+
 ## Quick Install
 
 ```bash
