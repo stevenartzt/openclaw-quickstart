@@ -2,167 +2,209 @@
 
 One-command setup for OpenClaw on **WSL**, **Linux**, or **VPS**.
 
-## Prerequisites
+---
 
-Before running the script, make sure you have:
+## 📋 Before You Start
 
-| Requirement | Details |
-|-------------|---------|
-| **OS** | WSL (Windows 10/11), Ubuntu, Debian, RHEL/CentOS, or macOS |
-| **RAM** | 4GB minimum, 8GB+ recommended |
-| **Storage** | 2GB free space |
-| **Internet** | Stable connection for downloads |
-| **API Key** | From one of: [Anthropic](https://console.anthropic.com/), [OpenAI](https://platform.openai.com/), or [OpenRouter](https://openrouter.ai/) |
+You'll need:
 
-### For WSL Users (Windows)
+| ✅ | Requirement | How to Get It |
+|----|-------------|---------------|
+| ☐ | **Windows 10/11** OR **Linux** OR **Mac** | You probably have this already |
+| ☐ | **4GB+ RAM** | Check: Settings → System → About |
+| ☐ | **2GB free disk space** | Check: File Explorer → This PC |
+| ☐ | **Internet connection** | You're reading this, so ✓ |
+| ☐ | **AI API Key** | Get one below (takes 2 min) |
 
-1. Open **PowerShell as Administrator**
-2. Run: `wsl --install`
-3. Restart your computer
-4. Open Ubuntu from Start menu and create your Linux username/password
+### 🔑 Get Your API Key (Required)
 
-### For VPS Users
+Pick ONE provider and sign up:
 
-- SSH access to your server
-- `sudo` privileges (or root access)
+| Provider | Link | Free Tier? |
+|----------|------|------------|
+| **Anthropic** (Recommended) | [console.anthropic.com](https://console.anthropic.com/) | $5 free credit |
+| **OpenAI** | [platform.openai.com](https://platform.openai.com/) | Pay as you go |
+| **OpenRouter** | [openrouter.ai](https://openrouter.ai/) | Some free models |
+
+**Save your API key somewhere safe** — you'll paste it during setup.
 
 ---
 
-## Quick Install
+## 🪟 Windows Users: Install WSL First
+
+> **Already have WSL?** Skip to [Quick Install](#-quick-install)
+
+### Step 1: Open PowerShell as Administrator
+
+1. Press `Windows Key`
+2. Type `PowerShell`
+3. Right-click → **"Run as administrator"**
+4. Click **Yes** if prompted
+
+### Step 2: Install WSL
+
+Copy and paste this command, then press Enter:
+
+```powershell
+wsl --install
+```
+
+Wait for it to finish (2-5 minutes).
+
+### Step 3: Restart Your Computer
+
+Seriously, restart. It won't work otherwise.
+
+### Step 4: Set Up Ubuntu
+
+After restart:
+
+1. **Ubuntu** will open automatically (or find it in Start menu)
+2. Wait for "Installing, this may take a few minutes..."
+3. Create a **username** (lowercase, no spaces) — e.g., `steven`
+4. Create a **password** (you'll type it twice, it won't show characters — that's normal)
+
+### Step 5: You're Ready!
+
+You should see something like:
+```
+steven@DESKTOP-ABC123:~$
+```
+
+Now continue to Quick Install below. ⬇️
+
+---
+
+## 🐧 Linux/VPS Users: Prerequisites
+
+Make sure you have:
+
+```bash
+# Update your system first
+sudo apt update && sudo apt upgrade -y
+
+# These should already be installed, but just in case:
+sudo apt install -y curl git
+```
+
+---
+
+## 🚀 Quick Install
+
+Copy this ONE command and paste it into your terminal:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/stevenartzt/openclaw-quickstart/main/setup.sh | bash
 ```
 
-Or clone and run:
+### What Happens Next
 
-```bash
-git clone https://github.com/stevenartzt/openclaw-quickstart.git
-cd openclaw-quickstart
-./setup.sh
-```
+The script will:
 
-## What It Does
+1. ✅ Install Node.js 22 (takes ~1 min)
+2. ✅ Install OpenClaw (takes ~30 sec)
+3. ✅ Create your workspace
+4. ❓ Ask: "Install Public.com trading skill?" → Type `y` or `n`
+5. ❓ Ask: "Enter your API key" → Paste your Anthropic/OpenAI key
+6. ❓ Ask: "Set up as background service?" → Type `y` for always-on
 
-1. ✅ Detects your OS (WSL/Debian/RedHat/macOS)
-2. ✅ Installs Node.js 22 via nvm
-3. ✅ Installs OpenClaw globally
-4. ✅ Creates workspace with starter files
-5. ✅ Optionally installs Public.com trading skill
-6. ✅ Runs the setup wizard for API keys
-7. ✅ Optionally sets up as a background service (systemd)
-
-## Requirements
-
-- Linux, WSL, or macOS
-- Internet connection
-- API key from Anthropic, OpenAI, or OpenRouter
-
-## After Setup
-
-```bash
-# Start the gateway
-openclaw gateway
-
-# Check health
-openclaw health
-
-# Connect Discord
-openclaw channels login discord
-
-# Connect WhatsApp
-openclaw channels login whatsapp
-```
-
-## Configuration
-
-Config file: `~/.openclaw/openclaw.json`
-
-```json
-{
-  "agents": {
-    "defaults": {
-      "model": "anthropic/claude-sonnet-4-20250514",
-      "workspace": "~/.openclaw/workspace"
-    }
-  },
-  "channels": {
-    "discord": {
-      "token": "your-bot-token",
-      "allowFrom": ["your-user-id"]
-    }
-  }
-}
-```
-
-## Public.com Trading
-
-If you installed the Public.com skill, add your credentials:
-
-```bash
-# Add to ~/.openclaw/.env
-echo 'PUBLIC_COM_SECRET=your-api-secret' >> ~/.openclaw/.env
-echo 'PUBLIC_COM_ACCOUNT_ID=your-account-id' >> ~/.openclaw/.env
-```
-
-Get your API secret at: https://public.com/settings/v2/api
-
-## Running as a Service
-
-The setup script can configure OpenClaw to run in the background automatically.
-
-Manual setup:
-
-```bash
-# Enable the service
-systemctl --user enable openclaw
-systemctl --user start openclaw
-
-# Check status
-systemctl --user status openclaw
-
-# View logs
-journalctl --user -u openclaw -f
-```
-
-## Troubleshooting
-
-### "openclaw: command not found"
-
-```bash
-# Reload shell
-source ~/.bashrc
-
-# Or add to PATH manually
-export PATH="$HOME/.nvm/versions/node/v22.*/bin:$PATH"
-```
-
-### Gateway won't start
-
-```bash
-openclaw doctor
-openclaw logs
-```
-
-### WSL networking issues
-
-```powershell
-# In PowerShell (Windows)
-wsl --shutdown
-# Then reopen WSL
-```
-
-## Links
-
-- [OpenClaw Docs](https://docs.openclaw.ai)
-- [GitHub](https://github.com/openclaw/openclaw)
-- [Discord Community](https://discord.com/invite/clawd)
-- [Public.com API](https://public.com/api/docs)
-
-## License
-
-MIT
+**Total time: ~5 minutes**
 
 ---
 
-Made with ☀️ by Sol
+## ✅ After Installation
+
+### Start OpenClaw
+
+```bash
+openclaw gateway
+```
+
+### Check if it's working
+
+```bash
+openclaw health
+```
+
+You should see: `Gateway: healthy`
+
+### Connect Discord (Optional)
+
+```bash
+openclaw channels login discord
+```
+
+### Connect WhatsApp (Optional)
+
+```bash
+openclaw channels login whatsapp
+```
+
+Scan the QR code with your phone.
+
+---
+
+## 🔧 Common Issues
+
+### "openclaw: command not found"
+
+Run this, then try again:
+
+```bash
+source ~/.bashrc
+```
+
+### "Permission denied"
+
+Run the original command with `bash` explicitly:
+
+```bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/stevenartzt/openclaw-quickstart/main/setup.sh)"
+```
+
+### WSL won't start
+
+In PowerShell (Admin):
+
+```powershell
+wsl --shutdown
+```
+
+Then reopen Ubuntu.
+
+### Something else broke
+
+```bash
+openclaw doctor
+```
+
+This will diagnose and suggest fixes.
+
+---
+
+## 📁 Where Things Live
+
+| What | Location |
+|------|----------|
+| Config file | `~/.openclaw/openclaw.json` |
+| Workspace | `~/.openclaw/workspace/` |
+| Logs | `/tmp/openclaw/` |
+| Credentials | `~/.openclaw/credentials/` |
+
+---
+
+## 🆘 Get Help
+
+- **Docs:** [docs.openclaw.ai](https://docs.openclaw.ai)
+- **Discord:** [discord.com/invite/clawd](https://discord.com/invite/clawd)
+- **GitHub:** [github.com/openclaw/openclaw](https://github.com/openclaw/openclaw)
+
+---
+
+## 📄 License
+
+MIT — use it however you want.
+
+---
+
+Made with ☀️ by [Sol](https://github.com/stevenartzt/Sol)
