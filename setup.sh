@@ -86,24 +86,26 @@ install_deps() {
 
 # Install Node.js 22 via nvm
 install_node() {
-    if command -v node &> /dev/null; then
-        NODE_VERSION=$(node -v | cut -d'v' -f2 | cut -d'.' -f1)
-        if [[ $NODE_VERSION -ge 22 ]]; then
-            log "Node.js $(node -v) already installed ✓"
-            return
-        fi
-    fi
-    
-    log "Installing Node.js 22..."
+    # Always use nvm for user-local node (avoids permission issues)
+    export NVM_DIR="$HOME/.nvm"
     
     # Install nvm if not present
-    if [[ ! -d "$HOME/.nvm" ]]; then
+    if [[ ! -d "$NVM_DIR" ]]; then
+        log "Installing nvm..."
         curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
     fi
     
     # Load nvm
-    export NVM_DIR="$HOME/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    
+    # Check if node 22 is already installed via nvm
+    if nvm ls 22 &> /dev/null; then
+        nvm use 22
+        log "Node.js $(node -v) already installed via nvm ✓"
+        return
+    fi
+    
+    log "Installing Node.js 22..."
     
     # Install Node 22
     nvm install 22
@@ -121,7 +123,14 @@ install_openclaw() {
     export NVM_DIR="$HOME/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
     
-    npm install -g openclaw
+    # Check if we're using nvm (user-local) or system node
+    if [[ -d "$NVM_DIR" ]] && command -v nvm &> /dev/null; then
+        # Using nvm - can install globally without sudo
+        npm install -g openclaw
+    else
+        # Using system node - need sudo for global install
+        sudo npm install -g openclaw
+    fi
     
     log "OpenClaw installed ✓"
 }
