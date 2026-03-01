@@ -78,11 +78,77 @@ Pick ONE provider and sign up:
 - For **serious work** (trading, complex workflows, reliability matters) → Claude Opus/Sonnet or GPT-4o
 - **Local models** are great for privacy and cost, but you trade capability
 
+### 💰 Budget Alternatives (Get 80% for 20% of the Cost)
+
+Running Opus 24/7 adds up. Here's how to get most of the capability without the bill:
+
+| Strategy | Monthly Cost | What You Get | Tradeoff |
+|----------|--------------|--------------|----------|
+| **Claude Sonnet only** | ~$5-15 | 80% capability, handles most tasks | Complex reasoning sometimes fails |
+| **OpenRouter free tier** | $0 | Llama 3, Mistral, some Claude | Rate limits, less reliable |
+| **Gemini 1.5 Flash** | $0-5 | Fast, big context, free tier | Less consistent, Google ecosystem |
+| **Mix: Sonnet + Opus fallback** | ~$10-20 | Best of both, Opus only when needed | Requires config tweaking |
+| **Local Llama 3 70B** | $0 (after hardware) | Full privacy, unlimited use | Needs 48GB+ VRAM or slow CPU inference |
+| **Local Llama 3 8B** | $0 | Runs on gaming PC | Only good for simple tasks |
+
+**Best Budget Setups:**
+
+**1. The "Good Enough" Stack (~$10/month)**
+```
+Primary: Claude Sonnet 3.5
+Use for: Everything day-to-day
+```
+Sonnet handles 80% of what Opus does. Code, automation, tool use, chat — all work great. You'll notice the difference on complex multi-step reasoning, but for most people this is plenty.
+
+**2. The "Smart Switching" Stack (~$15/month)**
+```
+Primary: Claude Sonnet 3.5 (daily tasks)
+Fallback: Claude Opus 4 (complex work)
+```
+Use Sonnet for routine stuff. When you need deep analysis, complex chains, or reliability matters — switch to Opus for that conversation. OpenClaw lets you change models per-session.
+
+**3. The "Free Tier Warrior" Stack ($0)**
+```
+Primary: Gemini 1.5 Flash (free tier)
+Backup: OpenRouter free models
+```
+Google gives you free Gemini API access. It's not Claude, but it handles basics well. Pair with OpenRouter's free Llama/Mistral models. You'll hit rate limits and quality issues, but it costs nothing.
+
+**4. The "Local First" Stack ($0 ongoing)**
+```
+Primary: Ollama + Llama 3 70B (if you have the hardware)
+Fallback: Ollama + Llama 3 8B (any decent PC)
+```
+Requires: 32GB+ RAM for 70B (slow), or RTX 3090/4090 for decent speed. The 8B model runs on any gaming PC. Great for privacy, unlimited use, but you lose capability.
+
+**5. The "Hybrid" Stack (~$5-10/month)**
+```
+Local: Llama 3 8B for simple chat/questions
+Cloud: Sonnet for anything requiring tools/automation
+```
+Keep simple stuff local and free. Only hit the API when you actually need the capability.
+
+**OpenRouter Tip:** Sign up at [openrouter.ai](https://openrouter.ai) — they aggregate models from all providers. You can use free models, set spending limits, and switch between Claude/GPT/Llama without changing your config. Great for experimenting.
+
+**What You Lose on a Budget:**
+- Complex multi-step reasoning (Opus is noticeably better)
+- Reliability on autonomous tasks (cheaper models fail more)
+- Speed on some tasks (local models are slow without good GPU)
+- Context length (some free models cap at 4-8K tokens)
+
+**What You Keep:**
+- Basic automation and scripting
+- Chat and Q&A
+- Simple tool use
+- Code generation (Sonnet is actually great at this)
+- Most day-to-day assistant tasks
+
 **Recommendations:**
 - **Just starting?** → Claude Sonnet 3.5 (best value)
 - **Need maximum capability?** → Claude Opus 4
-- **On a budget?** → OpenRouter with free models, or Gemini
+- **On a budget?** → Sonnet + occasional Opus, or Gemini free tier
 - **Privacy-focused?** → Local Llama via Ollama (accept the tradeoffs)
+- **Broke but determined?** → OpenRouter free models + Gemini free tier
 
 ---
 
