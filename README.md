@@ -30,6 +30,23 @@ Pick ONE provider and sign up:
 
 **Save your API key somewhere safe** — you'll paste it during setup.
 
+### 🤖 Model Comparison
+
+| Model | Best For | Pros | Cons | Cost |
+|-------|----------|------|------|------|
+| **Claude Sonnet 3.5** | Daily tasks, coding, chat | Fast, cheap, great at code | Less capable than Opus | ~$3/M tokens |
+| **Claude Opus 4** | Complex reasoning, long tasks | Most capable Claude, deep thinking | Expensive, slower | ~$15/M tokens |
+| **GPT-4o** | Multimodal, vision tasks | Fast, good vision, large context | Can be verbose | ~$5/M tokens |
+| **GPT-4 Turbo** | General use | Good all-rounder | Being phased out | ~$10/M tokens |
+| **Gemini Pro** | Google ecosystem | Free tier, fast | Less consistent | Free - $3.50/M |
+| **Llama 3 70B** | Privacy, local hosting | Can run locally, no API needed | Requires powerful hardware | Free (local) |
+
+**Recommendations:**
+- **Just starting?** → Claude Sonnet 3.5 (best value)
+- **Need maximum capability?** → Claude Opus 4
+- **On a budget?** → OpenRouter with free models, or Gemini
+- **Privacy-focused?** → Local Llama via Ollama
+
 ---
 
 ## 🪟 Windows Users: Install WSL First
@@ -202,6 +219,32 @@ This will diagnose and suggest fixes.
 - **Docs:** [docs.openclaw.ai](https://docs.openclaw.ai)
 - **Discord:** [discord.com/invite/clawd](https://discord.com/invite/clawd)
 - **GitHub:** [github.com/openclaw/openclaw](https://github.com/openclaw/openclaw)
+
+---
+
+## ⚠️ Risks & Considerations
+
+Before running any AI agent on your system, understand the risks:
+
+| Risk | Severity | What Could Happen | Mitigation |
+|------|----------|-------------------|------------|
+| **Unintended file access** | Medium | AI reads sensitive files (keys, passwords, documents) | Use sandboxing, restrict paths in config |
+| **Unintended commands** | High | AI runs destructive commands (`rm -rf`, etc.) | Use allowlist, dedicated user account |
+| **API cost overruns** | Medium | Expensive model + long tasks = high bills | Set spending limits in provider dashboard |
+| **Data exfiltration** | Low | AI could send your data to external services | Monitor network, use local models |
+| **Prompt injection** | Low | Malicious content tricks AI into bad actions | Don't process untrusted inputs |
+| **Always-on access** | Medium | Background service has persistent system access | Use Docker/VM, disable when not needed |
+
+### Risk Tolerance Guide
+
+| You Are... | Recommended Setup | Why |
+|------------|-------------------|-----|
+| **Cautious beginner** | Docker container or dedicated VPS | Maximum isolation, can't touch your files |
+| **Developer testing** | Dedicated WSL instance | Isolated but easy to access |
+| **Power user** | Dedicated user + path restrictions | Balance of convenience and safety |
+| **Living dangerously** | Default install | Full access, maximum capability |
+
+**Key principle:** The AI has exactly as much access as you give it. Start restricted, loosen as you build trust.
 
 ---
 
