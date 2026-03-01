@@ -247,6 +247,7 @@ curl -fsSL https://raw.githubusercontent.com/stevenartzt/openclaw-quickstart/mai
 ### Option 4: VPS/Cloud Instance
 
 Run OpenClaw on a cheap VPS ($5-10/month) instead of your local machine:
+- [Hostinger](https://hostinger.com/vps) ⭐ (great value, easy setup)
 - [DigitalOcean](https://digitalocean.com)
 - [Linode](https://linode.com)
 - [Vultr](https://vultr.com)
