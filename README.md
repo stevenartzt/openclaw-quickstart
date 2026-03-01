@@ -201,6 +201,103 @@ This will diagnose and suggest fixes.
 
 ---
 
+## 🔒 Security & Sandboxing
+
+OpenClaw can execute commands on your system. For maximum security, consider these isolation options:
+
+### Option 1: Dedicated WSL Instance (Recommended for Windows)
+
+Create a separate WSL distro just for OpenClaw:
+
+```powershell
+# In PowerShell (Admin)
+wsl --install -d Debian
+```
+
+This keeps OpenClaw completely separate from your main Linux environment.
+
+### Option 2: Dedicated User Account
+
+Run OpenClaw as a separate user with limited permissions:
+
+```bash
+# Create a dedicated user
+sudo adduser openclaw-user
+
+# Switch to that user
+sudo su - openclaw-user
+
+# Run the installer as this user
+curl -fsSL https://raw.githubusercontent.com/stevenartzt/openclaw-quickstart/main/setup.sh | bash
+```
+
+### Option 3: Docker Container (Most Isolated)
+
+```bash
+docker run -it --name openclaw-sandbox \
+  -v openclaw-data:/root/.openclaw \
+  -p 18789:18789 \
+  ubuntu:22.04 bash
+
+# Inside container, run the setup
+apt update && apt install -y curl
+curl -fsSL https://raw.githubusercontent.com/stevenartzt/openclaw-quickstart/main/setup.sh | bash
+```
+
+### Option 4: VPS/Cloud Instance
+
+Run OpenClaw on a cheap VPS ($5-10/month) instead of your local machine:
+- [DigitalOcean](https://digitalocean.com)
+- [Linode](https://linode.com)
+- [Vultr](https://vultr.com)
+- [Hetzner](https://hetzner.com) (EU)
+
+This provides complete isolation from your personal files.
+
+### OpenClaw's Built-in Sandboxing
+
+OpenClaw also has built-in tool restrictions. In `~/.openclaw/openclaw.json`:
+
+```json
+{
+  "tools": {
+    "exec": {
+      "enabled": true,
+      "allowlist": ["git", "node", "npm", "python3"],
+      "denyPaths": ["/home/*/Documents", "/home/*/Pictures"]
+    },
+    "read": {
+      "allowPaths": ["~/.openclaw/workspace"]
+    },
+    "write": {
+      "allowPaths": ["~/.openclaw/workspace"]
+    }
+  }
+}
+```
+
+### What OpenClaw CAN Access by Default
+
+| Access | Scope |
+|--------|-------|
+| Read files | Anywhere (unless restricted) |
+| Write files | Anywhere (unless restricted) |
+| Run commands | Any command (unless restricted) |
+| Network | Outbound to AI APIs |
+
+### What OpenClaw CANNOT Do
+
+| Blocked | Reason |
+|---------|--------|
+| Access other WSL distros | Separate filesystem |
+| Access Windows files | Unless explicitly mounted |
+| Run without your API key | No key = no AI |
+| Survive reboot | Unless set up as service |
+
+**Bottom line:** If you're security-conscious, use a dedicated WSL instance or Docker container. It takes 2 extra minutes and gives you peace of mind.
+
+---
+
 ## 📄 License
 
 MIT — use it however you want.
