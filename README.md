@@ -20,13 +20,148 @@ You'll need:
 
 ### 🔑 Get Your API Key (Required)
 
-Pick ONE provider and sign up:
+Pick ONE provider based on your needs:
 
-| Provider | Link | Free Tier? |
-|----------|------|------------|
-| **Anthropic** (Recommended) | [console.anthropic.com](https://console.anthropic.com/) | $5 free credit |
-| **OpenAI** | [platform.openai.com](https://platform.openai.com/) | Pay as you go |
-| **OpenRouter** | [openrouter.ai](https://openrouter.ai/) | Some free models |
+| Provider | Link | Free Tier? | Best For |
+|----------|------|------------|----------|
+| **Anthropic** | [console.anthropic.com](https://console.anthropic.com/) | $5 free credit | Best quality, serious use |
+| **OpenAI** | [platform.openai.com](https://platform.openai.com/) | Pay as you go | GPT-4, vision tasks |
+| **OpenRouter** | [openrouter.ai](https://openrouter.ai/) | Free models available | Budget, experimenting |
+| **Google AI** | [aistudio.google.com](https://aistudio.google.com/) | Generous free tier | Free usage, big context |
+| **Ollama** | [ollama.com](https://ollama.com/) | Fully free (local) | Privacy, no API costs |
+
+---
+
+### 🛠️ Setup by Provider
+
+<details>
+<summary><b>Option 1: Anthropic (Recommended)</b></summary>
+
+Best quality models. Claude Sonnet is the sweet spot for most users.
+
+1. Go to [console.anthropic.com](https://console.anthropic.com/)
+2. Sign up / Log in
+3. Go to **API Keys** → **Create Key**
+4. Copy your key (starts with `sk-ant-`)
+
+**During OpenClaw setup, enter:**
+```
+Provider: anthropic
+API Key: sk-ant-xxxxx
+Model: claude-sonnet-4-20250514
+```
+
+**Cost:** ~$3/million tokens (Sonnet), ~$15/million (Opus)
+
+</details>
+
+<details>
+<summary><b>Option 2: OpenAI</b></summary>
+
+Good all-rounder. GPT-4o is fast with great vision capabilities.
+
+1. Go to [platform.openai.com](https://platform.openai.com/)
+2. Sign up / Log in
+3. Go to **API Keys** → **Create new secret key**
+4. Copy your key (starts with `sk-`)
+
+**During OpenClaw setup, enter:**
+```
+Provider: openai
+API Key: sk-xxxxx
+Model: gpt-4o
+```
+
+**Cost:** ~$5/million tokens (GPT-4o)
+
+</details>
+
+<details>
+<summary><b>Option 3: OpenRouter (Budget / Multi-Model)</b></summary>
+
+Access multiple providers through one API. Great for experimenting or using free models.
+
+1. Go to [openrouter.ai](https://openrouter.ai/)
+2. Sign up / Log in
+3. Go to **Keys** → **Create Key**
+4. Copy your key (starts with `sk-or-`)
+
+**During OpenClaw setup, enter:**
+```
+Provider: openrouter
+API Key: sk-or-xxxxx
+Model: anthropic/claude-sonnet-4-20250514
+```
+
+**Free models to try:**
+- `meta-llama/llama-3-70b-instruct` — Best free option
+- `mistralai/mistral-7b-instruct` — Fast and decent
+- `google/gemma-7b-it` — Good for simple tasks
+
+**Cost:** Varies by model, many free options
+
+</details>
+
+<details>
+<summary><b>Option 4: Google AI / Gemini (Free Tier)</b></summary>
+
+Generous free tier. Good for getting started without paying.
+
+1. Go to [aistudio.google.com](https://aistudio.google.com/)
+2. Sign in with Google account
+3. Click **Get API Key** → **Create API key**
+4. Copy your key
+
+**During OpenClaw setup, enter:**
+```
+Provider: google
+API Key: xxxxx
+Model: gemini-1.5-flash
+```
+
+**Free tier limits:** 60 requests/minute, 1 million tokens/day
+
+**Cost:** Free for most personal use
+
+</details>
+
+<details>
+<summary><b>Option 5: Ollama (Local / Free / Private)</b></summary>
+
+Run models on your own hardware. No API costs, complete privacy.
+
+**Requirements:**
+- 8GB RAM minimum (for 7B models)
+- 32GB RAM for 70B models (slow on CPU)
+- NVIDIA GPU with 24GB+ VRAM for good speed
+
+**Install Ollama:**
+```bash
+curl -fsSL https://ollama.com/install.sh | sh
+```
+
+**Download a model:**
+```bash
+# Smaller, runs on most PCs
+ollama pull llama3:8b
+
+# Larger, needs good hardware
+ollama pull llama3:70b
+```
+
+**During OpenClaw setup, enter:**
+```
+Provider: ollama
+Model: llama3:8b
+```
+
+(No API key needed — it runs locally)
+
+**Cost:** Free forever (you pay for electricity)
+
+</details>
+
+---
 
 **Save your API key somewhere safe** — you'll paste it during setup.
 
