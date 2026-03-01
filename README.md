@@ -41,11 +41,48 @@ Pick ONE provider and sign up:
 | **Gemini Pro** | Google ecosystem | Free tier, fast | Less consistent | Free - $3.50/M |
 | **Llama 3 70B** | Privacy, local hosting | Can run locally, no API needed | Requires powerful hardware | Free (local) |
 
+### What's Actually Possible With Each Model?
+
+| Capability | Claude Opus | Sonnet/GPT-4o | Llama 70B Local | Small Models (7B) |
+|------------|-------------|---------------|-----------------|-------------------|
+| **Simple chat & Q&A** | ✅ Overkill | ✅ Great | ✅ Good | ✅ Fine |
+| **Code generation** | ✅ Excellent | ✅ Great | ⚠️ Decent | ⚠️ Basic only |
+| **Multi-step automation** | ✅ Reliable | ✅ Usually works | ⚠️ Hit or miss | ❌ Struggles |
+| **Tool use (APIs, files)** | ✅ Excellent | ✅ Good | ⚠️ Inconsistent | ❌ Poor |
+| **Complex reasoning** | ✅ Best available | ⚠️ Good enough | ⚠️ Limited | ❌ No |
+| **Trading/financial analysis** | ✅ Full capability | ✅ Works well | ⚠️ Basic only | ❌ Don't trust it |
+| **Long context (big files)** | ✅ 200K tokens | ✅ 128K+ | ⚠️ 8-32K typical | ❌ 4K typical |
+| **Memory/persistence** | ✅ Excellent | ✅ Good | ⚠️ Forgets more | ❌ Very limited |
+
+### Real Talk: Can You Do What We Do?
+
+**What we built with Claude Opus:**
+- Automated trading alerts with position guards
+- Multi-API integrations (brokerage, news, market data)
+- Self-maintaining memory system with semantic search
+- Scheduled tasks, scanners, monitoring
+- Complex multi-step workflows that just work
+
+**Could you do this with other models?**
+
+| Model | Verdict |
+|-------|---------|
+| **Claude Opus** | ✅ Yes — this is what we use. Handles complex autonomous tasks reliably. |
+| **Claude Sonnet** | ✅ Mostly — 80% of tasks work fine. Struggles with very complex multi-step reasoning. Good for cost savings on routine work. |
+| **GPT-4o** | ✅ Mostly — capable but sometimes needs more hand-holding. Tool use is solid. |
+| **Llama 70B** | ⚠️ Partially — can do simpler automations. Multi-step chains break more often. Wouldn't trust it for trading. |
+| **Llama 8B / Small models** | ❌ No — fine for chat, not for autonomous work. Will hallucinate tool calls, forget context, make bad decisions. |
+
+**Bottom line:** 
+- For **simple automation** (reminders, basic scripts, chat) → any model works
+- For **serious work** (trading, complex workflows, reliability matters) → Claude Opus/Sonnet or GPT-4o
+- **Local models** are great for privacy and cost, but you trade capability
+
 **Recommendations:**
 - **Just starting?** → Claude Sonnet 3.5 (best value)
 - **Need maximum capability?** → Claude Opus 4
 - **On a budget?** → OpenRouter with free models, or Gemini
-- **Privacy-focused?** → Local Llama via Ollama
+- **Privacy-focused?** → Local Llama via Ollama (accept the tradeoffs)
 
 ---
 
